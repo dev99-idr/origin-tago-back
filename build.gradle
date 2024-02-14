@@ -1,0 +1,73 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.TagoBackend'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+def copy_files = {
+
+	copy {
+		includeEmptyDirs = false
+		from fileTree("src/main/java/conf").include("**/*.xml").files
+		into "build/classes/java/main/conf"
+	}
+}
+
+task buildTask{
+	copy_files()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'org.hsqldb:hsqldb'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+	implementation 'com.google.code.gson:gson:2.8.6'
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+	implementation files('lib/kr.co.j2.das.jar')
+	implementation files('lib/log4j-1.2.17.jar')
+	implementation files('lib/mysql-connector-java-5.1.47.jar')
+	implementation files('lib/jdom.jar')
+	implementation files('lib/commons-collections-3.2.1.jar')
+	implementation files('lib/commons-dbcp-1.4.jar')
+	implementation files('lib/commons-fileupload-1.2.1.jar')
+	implementation files('lib/commons-io-1.4.jar')
+	implementation files('lib/commons-lang3-3.10.jar')
+	implementation files('lib/commons-pool-1.5.4.jar')
+	implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.6.0'
+	implementation group: 'javax.transaction', name: 'javax.transaction-api', version: '1.2'
+	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+//Thanks for using https://jar-download.com
+
+	
+
+}
+
+test {
+	useJUnitPlatform()
+}
