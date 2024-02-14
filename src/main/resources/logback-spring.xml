@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="FILE_LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}] [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="LOG_DIR" value="./logs" />
+    <property name="LOG_NAME" value="tago_front.log" />
+    <property name="LOG_PATH_NAME" value="${LOG_DIR}/${LOG_NAME}" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH_NAME}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 날짜별로 분리 -->
+            <fileNamePattern>${LOG_DIR}/%d{yyyy-MM-dd}/${LOG_NAME}.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>90</maxHistory>  <!-- 보관기간(개월) -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+	<logger name="org.springframework" level="info"/> 
+	
+	
+	<logger name="jdbc" level="OFF" appender-ref="console" />
+    <logger name="jdbc.sqlonly" level="OFF" appender-ref="console" />
+    <logger name="jdbc.sqltiming" level="DEBUG" appender-ref="console" />
+    <logger name="jdbc.audit" level="DEBUG" appender-ref="console" />
+    <logger name="jdbc.resultset" level="DEBUG" appender-ref="console" />
+    <logger name="jdbc.resultsettable" level="DEBUG" appender-ref="console" />
+    <logger name="jdbc.connection" level="DEBUG" appender-ref="console" />   
+    <logger name="org.springframework.web.bind.annotation.RequestMapping" level="DEBUG" appender-ref="console" />
+	
+	
+	<logger name="com.tagoBackend" level="info"/> 
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE" /><!-- Console에 로그를 출력하고자 할 때 사용 -->
+        <appender-ref ref="FILE"  /><!-- File로 로그를 남기고자 할 때 사용 -->
+    </root>
+</configuration>

@@ -1,0 +1,29 @@
+package com.tagoBackend.response;
+
+public enum StatusEnum {
+    OK(200, "OK"),
+    CREATED(201, "CREATED"),
+    ACCEPTED(202, "ACCEPTED"),
+    NO_CONTENT(204, "NO_CONTENT"),
+    BAD_REQUEST(400, "BAD_REQUEST"),
+    UNAUTHORIZED(401, "UNAUTHORIZED"),
+    FORBIDDEN(403, "ACCESS_DENIED"),
+    NOT_FOUND(404, "NOT_FOUND"),
+    METHOD_NOT_ALLOWED(405, "METHOD_NOT_ALLOWED"),
+    NOT_ACCEPTABLE(406, "NOT_ACCEPTABLE"),
+    REQUEST_TIMEOUT(408, "REQUEST_TIMEOUT"),
+    CONFLICT(409, "CONFLICT"),
+    PAYLOAD_TOO_LARGE(413, "PAYLOAD_TOO_LARGE"),
+    LOCKED(423, "LOCKED"),
+    PRECONDITION_REQUIRED(428, "PRECONDITION_REQUIRED"),
+    TOO_MANY_REQUESTS(429, "TOO_MANY_REQUESTS"),
+    INTERNAL_SERVER_ERROR(500, "INTERNAL_SERVER_ERROR");
+
+    int statusCode;
+    String code;
+
+    StatusEnum(int statusCode, String code) {
+        this.statusCode = statusCode;
+        this.code = code;
+    }
+}

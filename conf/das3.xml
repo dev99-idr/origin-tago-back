@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<das3>
+	<!--
+	db_type
+	0 : Hsqldb
+	1 : Oracle
+	2 : Mssql
+	3 : Mysql
+	-->
+	<db name="tago1" type="3">
+		<!-- <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName> -->
+		<driverClassName>net.sf.log4jdbc.sql.jdbcapi.DriverSpy</driverClassName>
+		<url>jdbc:mysql://1.214.18.246:3306/tago?serverTimezone=UTC&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false</url>
+		<username>myultra</username>
+		<password>myultra1</password>
+
+		<minIdle>5</minIdle>
+		<maxActive>50</maxActive>
+		<maxWait>10000</maxWait>
+
+		<poolPreparedStatements>false</poolPreparedStatements>
+		<maxOpenPreparedStatements>300</maxOpenPreparedStatements>
+
+		<removeAbandoned>true</removeAbandoned>
+		<removeAbandonedTimeout>30</removeAbandonedTimeout>
+		<logAbandoned>true</logAbandoned>
+
+		<validationQuery>select 1</validationQuery>
+		<testWhileIdle>true</testWhileIdle>
+		<minEvictableIdleTimeMillis>1800000</minEvictableIdleTimeMillis>
+		<timeBetweenEvictionRunsMillis>60000</timeBetweenEvictionRunsMillis>
+	</db>
+	<db name="tago" type="3">
+		<!-- <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName> -->
+		<driverClassName>net.sf.log4jdbc.sql.jdbcapi.DriverSpy</driverClassName>
+		<url>jdbc:mysql://idrenvision.iptime.org:13306/tago?serverTimezone=UTC&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false</url>
+		<username>myultra</username>
+		<password>myultra1</password>
+
+		<minIdle>5</minIdle>
+		<maxActive>50</maxActive>
+		<maxWait>10000</maxWait>
+
+		<poolPreparedStatements>false</poolPreparedStatements>
+		<maxOpenPreparedStatements>300</maxOpenPreparedStatements>
+
+		<removeAbandoned>true</removeAbandoned>
+		<removeAbandonedTimeout>30</removeAbandonedTimeout>
+		<logAbandoned>true</logAbandoned>
+
+		<validationQuery>select 1</validationQuery>
+		<testWhileIdle>true</testWhileIdle>
+		<minEvictableIdleTimeMillis>1800000</minEvictableIdleTimeMillis>
+		<timeBetweenEvictionRunsMillis>60000</timeBetweenEvictionRunsMillis>
+	</db>
+	<db name="tago2" type="3">
+		<!-- <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName> -->
+		<driverClassName>net.sf.log4jdbc.sql.jdbcapi.DriverSpy</driverClassName>
+		<url>jdbc:mysql://localhost:3306/tago?serverTimezone=UTC&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false</url>
+		<username>root</username>
+		<password>cha16</password>
+
+		<minIdle>5</minIdle>
+		<maxActive>50</maxActive>
+		<maxWait>10000</maxWait>
+
+		<poolPreparedStatements>false</poolPreparedStatements>
+		<maxOpenPreparedStatements>300</maxOpenPreparedStatements>
+
+		<removeAbandoned>true</removeAbandoned>
+		<removeAbandonedTimeout>30</removeAbandonedTimeout>
+		<logAbandoned>true</logAbandoned>
+
+		<validationQuery>select 1</validationQuery>
+		<testWhileIdle>true</testWhileIdle>
+		<minEvictableIdleTimeMillis>1800000</minEvictableIdleTimeMillis>
+		<timeBetweenEvictionRunsMillis>60000</timeBetweenEvictionRunsMillis>
+	</db>
+</das3>
