@@ -394,4 +394,114 @@ public class TagMonitoringService {
             return new LinkedList();
         }
     }
+
+    public LinkedList getTagZigbeeBle(JSONObject json) {
+        try{
+
+            String zigbeeThingId = json.get("thingid").toString();
+
+        	String sql = "select * from tbl_zigbee_ble where 1=1 and del_yn = 'N' and zigbee_thing_id = ?;";
+
+            LinkedList list = new LinkedList();
+            list.add(zigbeeThingId);
+
+            LinkedList resultList = db.select(null, sql, list);
+
+            return  resultList;
+        }catch (Exception e){
+            return new LinkedList();
+        }
+    }
+
+    public LinkedList getNotMappingBle() {
+        try{
+
+        	String sql = " select a.idx, a.tag_thing_id " +
+        	             " from tbl_smart_tag_info a " +
+        	             " left outer join tbl_zigbee_ble b " +
+        	             " on a.tag_thing_id = b.ble_thing_id " +
+        	             " and b.del_yn = 'N' " +
+        	             " where 1=1 " +
+        	             " and a.tag_thing_id like ('%BTAG%') " +
+        	             " and b.ble_thing_id is null; ";
+
+            LinkedList resultList = db.select(null, sql, null);
+
+            return  resultList;
+        }catch (Exception e){
+            return new LinkedList();
+        }
+    }
+
+    public void saveZigbeeBleTag(JSONObject json) {
+        try {
+            String zigbeeThingId = json.get("zigbeeThingId").toString();
+            String bleThingId = json.get("bleThingId").toString();
+
+            int count = -1;
+
+            LinkedList list = new LinkedList();
+            list.add(zigbeeThingId);
+
+            String countSql = " select count(*) as count from tbl_zigbee_ble where 1=1 and zigbee_thing_id = ? ";
+            
+            LinkedList countList = db.select(null, countSql, list);
+            
+            Integer count1 = Integer.parseInt(countList.get(0).toString().replace("{count=","").replace("}",""));
+            
+            if(count1 > 0){
+
+                // update
+                LinkedHashMap updateMap = new LinkedHashMap();
+                updateMap.put("del_yn", "N");
+                updateMap.put("ble_thing_id", bleThingId);
+
+                LinkedList updateList = new LinkedList();
+                updateList.add(zigbeeThingId);
+
+                String sql2 = " where 1=1 and zigbee_thing_id = ? ";
+                count = db.update(null, "tbl_zigbee_ble", updateMap, sql2, updateList);
+            }else{
+                // insert
+                LinkedHashMap insertMap = new LinkedHashMap();
+                insertMap.put("zigbee_thing_id", zigbeeThingId);
+                insertMap.put("ble_thing_id", bleThingId);
+                insertMap.put("create_dt", System.currentTimeMillis());
+                insertMap.put("update_dt", System.currentTimeMillis());
+
+                count = db.insert(null, "tbl_zigbee_ble", insertMap);
+            }
+
+            // count = db.insert(null, "tbl_tag_map_info", map);
+            if (count < 1) throw new Exception();
+
+        } catch (Exception e) {
+            new Exception();
+        }
+    }
+
+    public void removeZigbeeBleTag(JSONObject json) {
+        try {
+            String zigbeeThingId = json.get("zigbeeThingId").toString();
+
+            int count = -1;
+
+            // update
+            LinkedHashMap updateMap = new LinkedHashMap();
+            updateMap.put("del_yn", "Y");
+            updateMap.put("ble_thing_id", "");
+
+            LinkedList updateList = new LinkedList();
+            updateList.add(zigbeeThingId);
+
+            String sql2 = " where 1=1 and zigbee_thing_id = ? ";
+            count = db.update(null, "tbl_zigbee_ble", updateMap, sql2, updateList);
+           
+            // count = db.insert(null, "tbl_tag_map_info", map);
+            if (count < 1) throw new Exception();
+
+        } catch (Exception e) {
+            new Exception();
+        }
+    }
 }

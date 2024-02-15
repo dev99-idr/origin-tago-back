@@ -13,7 +13,7 @@
 	<db name="tago1" type="3">
 		<!-- <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName> -->
 		<driverClassName>net.sf.log4jdbc.sql.jdbcapi.DriverSpy</driverClassName>
-		<url>jdbc:mysql://1.214.18.246:3306/tago?serverTimezone=UTC&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false</url>
+		<url>jdbc:mysql://1.214.18.246:3306/tago?serverTimezone=UTC&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</url>
 		<username>myultra</username>
 		<password>myultra1</password>
 
@@ -36,7 +36,7 @@
 	<db name="tago" type="3">
 		<!-- <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName> -->
 		<driverClassName>net.sf.log4jdbc.sql.jdbcapi.DriverSpy</driverClassName>
-		<url>jdbc:mysql://idrenvision.iptime.org:13306/tago?serverTimezone=UTC&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false</url>
+		<url>jdbc:mysql://idrenvision.iptime.org:13306/tago?serverTimezone=UTC&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</url>
 		<username>myultra</username>
 		<password>myultra1</password>
 
@@ -59,7 +59,7 @@
 	<db name="tago2" type="3">
 		<!-- <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName> -->
 		<driverClassName>net.sf.log4jdbc.sql.jdbcapi.DriverSpy</driverClassName>
-		<url>jdbc:mysql://localhost:3306/tago?serverTimezone=UTC&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false</url>
+		<url>jdbc:mysql://localhost:3306/tago?serverTimezone=UTC&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</url>
 		<username>root</username>
 		<password>cha16</password>
 

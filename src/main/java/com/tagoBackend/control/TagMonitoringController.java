@@ -252,6 +252,110 @@ public class TagMonitoringController {
             return new ResponseEntity<>(cf.crtMsg(StatusEnum.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", ""), headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    /**
+     * 2024.02.14
+     * 박상문
+     * zigbee ble tag mapping 리스트 조회
+     * @param param
+     * @return
+     */
+    @RequestMapping(value="/tag-zigbee-ble", method = RequestMethod.POST)
+    public ResponseEntity<Message> getTagZigbeeBle(@RequestBody JSONObject param) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        try {
+            JSONObject json = new JSONObject(param);
+
+            LinkedList getTagZigbeeBleResult = TagMonitoringService.getTagZigbeeBle(json);
+
+            JSONObject resJson = new JSONObject();
+            resJson.put("getTagZigbeeBleResult", getTagZigbeeBleResult);
+
+            if(getTagZigbeeBleResult == null) return new ResponseEntity<>(cf.crtMsg(StatusEnum.NO_CONTENT, "UNAUTHORIZED",""), headers, HttpStatus.UNAUTHORIZED);
+
+            return new ResponseEntity<>(cf.crtMsg(StatusEnum.OK, "OK", resJson), headers, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            log.error(e.getMessage() + "\n" + e.getStackTrace());
+            e.printStackTrace();
+            return new ResponseEntity<>(cf.crtMsg(StatusEnum.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", ""), headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 2024.02.14
+     * 박상문
+     * ble tag mapping 안된 리스트 조회
+     * @param param
+     * @return
+     */
+    @RequestMapping(value="/not-mapping-ble", method = RequestMethod.POST)
+    public ResponseEntity<Message> getNotMappingBle() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        try {
+
+            LinkedList getNotMappingBleResult = TagMonitoringService.getNotMappingBle();
+
+            JSONObject resJson = new JSONObject();
+            resJson.put("getNotMappingBleResult", getNotMappingBleResult);
+
+            if(getNotMappingBleResult == null) return new ResponseEntity<>(cf.crtMsg(StatusEnum.NO_CONTENT, "UNAUTHORIZED",""), headers, HttpStatus.UNAUTHORIZED);
+
+            return new ResponseEntity<>(cf.crtMsg(StatusEnum.OK, "OK", resJson), headers, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            log.error(e.getMessage() + "\n" + e.getStackTrace());
+            e.printStackTrace();
+            return new ResponseEntity<>(cf.crtMsg(StatusEnum.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", ""), headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 2024.02.14
+     * 박상문
+     * ble tag mapping 등록/수정
+     * @param param
+     * @return
+     */
+    @RequestMapping(value="/save-zigbee-ble", method = RequestMethod.POST)
+    public ResponseEntity<Message> saveZigbeeBleTag(@RequestBody JSONObject param) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        try {
+            JSONObject json = new JSONObject(param);
+            TagMonitoringService.saveZigbeeBleTag(json);
+            return new ResponseEntity<>(cf.crtMsg(StatusEnum.OK, "OK", ""), headers, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            log.error(e.getMessage() + "\n" + e.getStackTrace());
+            e.printStackTrace();
+            return new ResponseEntity<>(cf.crtMsg(StatusEnum.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", ""), headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 2024.02.14
+     * 박상문
+     * ble tag mapping 삭제
+     * @param param
+     * @return
+     */
+    @RequestMapping(value="/remove-zigbee-ble", method = RequestMethod.POST)
+    public ResponseEntity<Message> removeZigbeeBleTag(@RequestBody JSONObject param) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        try {
+            JSONObject json = new JSONObject(param);
+            TagMonitoringService.removeZigbeeBleTag(json);
+            return new ResponseEntity<>(cf.crtMsg(StatusEnum.OK, "OK", ""), headers, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            log.error(e.getMessage() + "\n" + e.getStackTrace());
+            e.printStackTrace();
+            return new ResponseEntity<>(cf.crtMsg(StatusEnum.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", ""), headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }
