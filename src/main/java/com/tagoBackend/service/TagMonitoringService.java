@@ -28,7 +28,7 @@ public class TagMonitoringService {
     public LinkedList tagList() {
         try{
 
-        	String sql = "select list.*, loc.location_name";
+        	String sql = "select list.*, loc.location_name, node.tag_size, node.node_type";
         			sql += " from tbl_smart_tag_info as list";
         			sql += " inner join tbl_location_info as loc on list.tag_location = loc.idx and list.del_yn = 'N'";
         			sql += " inner join tbl_node as node on list.tag_thing_id = node.node_name and node.del_yn = 'N'";
@@ -49,7 +49,7 @@ public class TagMonitoringService {
     
     public LinkedList tagList(int pageNumber, int pageSize,int totalCount) {
         try{
-        	String sql = "select list.*, loc.location_name";
+        	String sql = "select list.*, loc.location_name, node.tag_size, node.node_type";
 			sql += " from tbl_smart_tag_info as list";
 			sql += " inner join tbl_location_info as loc on list.tag_location = loc.idx and list.del_yn = 'N'";
 			sql += " inner join tbl_node as node on list.tag_thing_id = node.node_name and node.del_yn = 'N'";
