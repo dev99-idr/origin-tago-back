@@ -12,14 +12,24 @@ import java.util.LinkedList;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
 
 import com.tagoBackend.control.TagMonitoringController;
+import com.tagoBackend.custom.MqttApi;
 
 import kr.co.j2.das.sql.DAS3;
 
+@Service
 public class TagMonitoringService {
     DAS3 db = new DAS3("tago");
     private final Logger log = LoggerFactory.getLogger(TagMonitoringController.class);
+
+    @Value("${mqtt.broker}")
+    private String broker;
 
     /**
      * tag list
@@ -473,7 +483,11 @@ public class TagMonitoringService {
             }
 
             // count = db.insert(null, "tbl_tag_map_info", map);
-            if (count < 1) throw new Exception();
+            if (count < 1){
+                throw new Exception();
+            } else{
+                MqttApi.publish(broker,zigbeeThingId, bleThingId, "1");
+            }
 
         } catch (Exception e) {
             new Exception();
@@ -483,6 +497,7 @@ public class TagMonitoringService {
     public void removeZigbeeBleTag(JSONObject json) {
         try {
             String zigbeeThingId = json.get("zigbeeThingId").toString();
+            String bleThingId = json.get("bleThingId").toString();
 
             int count = -1;
 
@@ -498,7 +513,11 @@ public class TagMonitoringService {
             count = db.update(null, "tbl_zigbee_ble", updateMap, sql2, updateList);
            
             // count = db.insert(null, "tbl_tag_map_info", map);
-            if (count < 1) throw new Exception();
+            if (count < 1){
+                throw new Exception();
+            } else{
+                MqttApi.publish(broker,zigbeeThingId, bleThingId, "0");
+            }
 
         } catch (Exception e) {
             new Exception();

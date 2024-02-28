@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,7 +29,10 @@ import com.tagoBackend.service.TagMonitoringService;
 @RestController
 @RequestMapping(value = "/tag-monitoring")
 public class TagMonitoringController {
-    com.tagoBackend.service.TagMonitoringService TagMonitoringService = new TagMonitoringService();
+    //com.tagoBackend.service.TagMonitoringService TagMonitoringService = new TagMonitoringService();
+
+    @Autowired
+    private TagMonitoringService TagMonitoringService;
 
     CustomFunction cf = new CustomFunction();
 
